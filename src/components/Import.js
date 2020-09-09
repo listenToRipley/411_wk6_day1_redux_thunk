@@ -1,33 +1,67 @@
-import React from 'react';
-import {Button, TableContainer, Table, TableHead, TableBody, TableRow, TableCell} from '@material-ui/core'
+import React, {setState} from 'react';
+import {Container, Button, TableContainer, Table, TableHead, TableBody, TableRow, TableCell} from '@material-ui/core'
+// import ImportActionMenu from './ImportActionMenu'
 
 const Import = (props) => {
-    console.log('the return on props',props.fetchMakes)
+    const [showTable, setShowTable] = React.useState(false);
+
+    const displayTable = () => {
+        props.fetchMakes();
+        setShowTable(true);
+    }
+
+    const DisplayTableHead = () => {
+        return (
+            <TableHead className='importTableHead'>
+                <TableRow>
+                    <TableCell > ID </TableCell>
+                    <TableCell > Make </TableCell>
+                    <TableCell > Action </TableCell>
+                </TableRow>
+                <Table>
+                    <TableBody>
+                        {props.makes.map((cars) => (
+                        <TableRow key={cars.MakeId}> 
+                            <TableCell>{cars.MakeId}</TableCell>
+                            <TableCell>{cars.MakeName}</TableCell>
+                            <TableCell>Actions</TableCell>
+                        </TableRow>
+                   
+                ))}
+                    </TableBody>
+                </Table>
+            </TableHead>
+        )
+    }
+
+
+    const DefaultDisplay = () => {
+         return (
+             <h3 className='importDefaultDisplay'>
+                 Click the import button above to show the current makes
+             </h3>
+         ) 
+    }
+
 
     return (
-        <div>
-        <p>Import component</p>
-            <Button onClick={props.fetchMakes}>Import</Button>
-            <TableContainer>
-            <Table>
-                <TableHead>Import Items
-           
-                    <TableRow> 
-                      <TableCell>ID</TableCell>
-                      <TableCell>Make</TableCell>
-                      <TableCell>Actions</TableCell>
-                    </TableRow>
-                </TableHead>
+        <div className='import-container'> 
+            <Container>
+                <div>
+                    <h2>There are currently : {props.makes}</h2>
+                </div>
+                <Button 
+                    className='importBtn'
+                    onClick={displayTable}>
+                Import
+                </Button>
+                
+                <TableContainer>
+                    {showTable ? <DisplayTableHead/> : <DefaultDisplay/>}
+                </TableContainer> 
 
-                <TableBody> 
+            </Container>
 
-                {/* {props.fetchMakes.map((car) => {
-                    <TableRow key={car.makeId}></TableRow>
-                })} */}
-
-                </TableBody>
-            </Table>
-            </TableContainer>
         </div>
     )
 }

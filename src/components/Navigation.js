@@ -22,11 +22,12 @@ const Navigation = () => {
                         <Link to="/about">About</Link>
                     </li>
                     <li className="nav-list-item">
-                        <Link to="/dashboard">Dasboard</Link>
-                    </li>
-                    <li className="nav-list-item">
                         <Link to="/import">Import</Link>
                     </li>
+                    <li className="nav-list-item">
+                        <Link to="/dashboard">Dasboard</Link>
+                    </li>
+
                 </ul>
             </Toolbar>
         </AppBar>
