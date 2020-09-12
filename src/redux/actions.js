@@ -18,18 +18,21 @@ export const removeCar = (index) => {
 export const fetchMakes = () => {
  return (dispatch) => {
     fetch(url) 
-    .then(req => req.json())
-    .then(res => {
+    .then(res => res.json())
+    .then((data) => {
 
         dispatch({
         type: 'FETCH_MAKES',
-        value: res.Results
+        value: data.Results
         })
     })
 
  }
 }
 
-
-
-export default fetchMakes
+export const deleteMake = (index) => {
+    return {
+        type: 'DELETE_MAKE',
+        value: index, 
+    }
+}
