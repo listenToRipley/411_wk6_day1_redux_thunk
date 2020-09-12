@@ -1,16 +1,20 @@
 import React from 'react';
-import {MoreVert} from '@material-ui/icon';
-import {Menu, MenuItem} from '@material-ui/core'
+import IconButton from '@material-ui/core/IconButton';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import MoreVertIcon from '@material-ui/icons/MoreVert'
 
 const ActionOptions = (props) => {
-  const [ actionPoint, setActionPoint] = React.useState(null);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const options = ['Delete']
 
   const handleClick = (event) => {
-    setActionPoint(event.currentTarget)
+    setAnchorEl(event.currentTarget);
   }
 
   const handleClose = () => {
-    setActionPoint(null);
+    setAnchorEl(null);
   }
 
   const handleDelete = () => {
@@ -20,11 +24,23 @@ const ActionOptions = (props) => {
 
   return (
     <div>
-      <MoreVert>
-        <Menu id="actionPointMenu" actionPoint={actionPoint} keepMounted open={Boolean(actionPoint)} onClose={handleClose}>
-          <MenuItem onClick={handleDelete}>Delete</MenuItem>
+      <IconButton
+        aria-label="more"
+        aria-controls="long-menu"
+        aria-haspopup="true"
+      >
+      <MoreVertIcon onClick={handleClick}/>
+      </IconButton>
+      <Menu
+        id="long-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+          <MenuItem key={options} selected={options === 'Delete'} onClick={handleDelete}>Delete</MenuItem>
         </Menu>
-      </MoreVert>    
+    
     </div>
   )
 

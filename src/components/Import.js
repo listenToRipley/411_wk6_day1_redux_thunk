@@ -6,7 +6,7 @@ const Import = (props) => {
     const [displayTable, setDisplayTable] = useState(false)
 
     const showTable = () => {
-        props.fetchMakes;
+        props.fetchMakes();
         setDisplayTable(true);
     }
 
