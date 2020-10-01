@@ -61,3 +61,8 @@ ul {
 .car-paper {
   padding: 50px;
 }
+
+.importBtn {
+  max-height: 35px;
+  align-self: center;
+}
